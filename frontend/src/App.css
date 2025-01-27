@@ -1,0 +1,38 @@
+
+/* Basic Nav.Link Styling */
+.nav-link {
+  position: relative; /* Required to position the underline */
+  padding-bottom: 5px; /* Some space at the bottom */
+  color: white; /* Set the default text color */
+  text-decoration: none; /* Remove default underline */
+}
+
+/* Underline Effect */
+.nav-link::after {
+  content: ''; /* Create an empty content for the underline */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0; /* Start with no underline width */
+  height: 2px; /* Height of the underline */
+  background-color: #ffffff; /* White color for the underline */
+  transition: width 0.3s ease; /* Smooth transition for the underline */
+}
+
+/* Underline on Hover */
+.nav-link:hover::after {
+  width: 100%; /* When hovered, the underline expands to full width */
+}
+
+/* Optional: Add active class styling if needed */
+.nav-link.active::after {
+  width: 100%;
+}
+
+  .bg-hero{
+    background: url(../src/assets/bg.jpg) bottom center no-repeat;
+    height: 100vh;
+  }
+  .J{
+    color: yellow;
+  }
