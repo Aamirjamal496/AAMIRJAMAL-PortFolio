@@ -1,8 +1,14 @@
-import React from 'react'
-import Hero from '../commons/Hero';
-  import Header from '../commons/Header';
+import React from 'react';
+import Hero from '../commons/HomeHero.jsx';
+import Header from '../commons/Header.jsx';
+import About from '../commons/About.jsx';
+import Skills from '../commons/Skills.jsx';
+import Portfolio from './Portfolio.jsx';
 
-// import Logo from '../assets/Logo1.png';
+
+
+import Footer from './Footer.jsx';
+
 
 const Home = () => {
   
@@ -11,7 +17,11 @@ const Home = () => {
   <Header/>
   <Hero/>
 </div>
-    </>
+<About/>
+<Skills/>
+<Portfolio/>
+<Footer/>
+</>
   );
 }
 

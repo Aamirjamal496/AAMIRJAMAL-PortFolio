@@ -2,7 +2,6 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Logo from '../assets/Logo1.png';
 import '../App.css';
 
 const Header = () => {
@@ -18,7 +17,7 @@ const Header = () => {
                 <Nav className="ms-auto text-light">
                   <Nav.Link href="/" className="nav-link mx-3 text-light">Home</Nav.Link>
                   <Nav.Link href="/about" className="nav-link mx-3 text-light">About</Nav.Link>
-                  <Nav.Link href="/contact" className="nav-link mx-3 text-light">Contact Us</Nav.Link>
+                  <Nav.Link href="/contact" className="nav-link mx-3 text-light">Contact Me</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Container>
