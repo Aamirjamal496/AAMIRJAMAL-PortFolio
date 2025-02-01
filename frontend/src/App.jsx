@@ -3,9 +3,9 @@ import './App.css';
 import './assets/CSS/Hero.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
-import Home from './components/Home';
-import About from './components/About';
-import ContactUs from './components/ContactUs';
+import Home from './assets/pages/Home.jsx';
+import About from './assets/pages/About.jsx';
+import ContactUs from './assets/pages/ContactUs.jsx';
 
 function App() {
 

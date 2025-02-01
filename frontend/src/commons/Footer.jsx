@@ -81,7 +81,7 @@ const Footer = () => {
           fontSize: "1rem",
         }}
       >
-        {["Home", "About", "Portfolio", "Contact"].map((text, index) => (
+        {["Home", "About", "Skills", "Portfolio"].map((text, index) => (
           <motion.button
             key={index}
             onClick={() => handleSmoothScroll(text.toLowerCase())}
