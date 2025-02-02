@@ -6,6 +6,7 @@ import { BrowserRouter,Route,Routes } from 'react-router-dom';
 import Home from './assets/pages/Home.jsx';
 import About from './assets/pages/About.jsx';
 import ContactUs from './assets/pages/ContactUs.jsx';
+import Dashboard from './admin/Dashboard.jsx';
 
 function App() {
 
@@ -16,6 +17,10 @@ function App() {
       <Route path='/' element={<Home/>} />
       <Route path='/about' element={<About/>} />
       <Route path='/contact' element={<ContactUs/>} />
+      {/* Admin Dashboard */}
+      <Route path="/admin" element={<Dashboard />}>
+          <Route index element={<h2>Welcome, Admin!</h2>} />
+        </Route>
     </Routes>
     </BrowserRouter>
     </>

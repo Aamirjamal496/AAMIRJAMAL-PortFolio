@@ -14,7 +14,6 @@ const Home = () => {
   
   return (<>
   <div className='bg-hero'>
-  
   <Header/>
   <Hero/>
 </div>

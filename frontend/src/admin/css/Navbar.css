@@ -1,0 +1,54 @@
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    width: calc(100% - 240px);
+    top: 0;
+    left: 240px;
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+  }
+  
+  /* When Sidebar is Collapsed */
+  .navbar.collapsed {
+    left: 70px;
+    width: calc(100% - 70px);
+  }
+  
+  /* Navbar Title */
+  .navbar-title {
+    font-size: 22px;
+  }
+  
+  /* Login Button */
+  .login-btn {
+    background-color: #00d8ff;
+    border: none;
+    padding: 8px 15px;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Toggle Button */
+  .toggle-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Responsive Navbar */
+  @media (max-width: 768px) {
+    .navbar {
+      left: 70px;
+      width: calc(100% - 70px);
+    }
+  }
+  
