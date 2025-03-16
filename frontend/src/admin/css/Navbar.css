@@ -3,13 +3,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
-    color: white;
+    background-color: #28242446;
+    /* color: white; */
     padding: 15px;
     position: fixed;
-    width: calc(100% - 240px);
+    width: calc(100% - 280px);
     top: 0;
-    left: 240px;
+    left: 280px;
+    /* margin-bottom:12px ; */
+
     transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
   }
   
@@ -22,14 +24,15 @@
   /* Navbar Title */
   .navbar-title {
     font-size: 22px;
+    text-align: center;
   }
   
   /* Login Button */
   .login-btn {
-    background-color: #00d8ff;
+    /* background-color: #00d8ff; */
     border: none;
     padding: 8px 15px;
-    color: black;
+    /* color: black; */
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;

@@ -35,7 +35,7 @@ const Hero = () => {
           Full Stack Developer
         </motion.h2>
         <motion.a
-          href="https://www.linkedin.com"
+          href="https://www.linkedin.com/in/aamir-jamal-aj-%F0%9F%8C%90-84183622b/?lipi=urn%3Ali%3Apage%3Ad_flagship3_notifications%3BLmtc1vROSRmflI3Q9O6yaw%3D%3D"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ scale: 0 }}

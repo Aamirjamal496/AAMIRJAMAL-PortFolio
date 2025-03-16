@@ -1,4 +1,17 @@
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(41, 38, 38, 0.388);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
 /* Basic Nav.Link Styling */
 .nav-link {
   position: relative; /* Required to position the underline */
@@ -36,6 +49,10 @@
   .J{
     color: yellow;
   }
+  .logo{
+    background-color: rgb(56, 55, 53);
+    border-radius: 30px;
+  }
 /* CSS for commons hero */
 .about-hero {
   background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0)),url("./assets/bg.jpg") center/cover no-repeat;
@@ -47,6 +64,7 @@
 }
 
 .about-text h5 {
+  padding-top: 69px;
   font-size: 1.2rem;
   letter-spacing: 2px;
   color: #00d8ff;
@@ -110,14 +128,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 5%;
+  padding: 30px 5%;
 }
 
 .contact-form {
   background: #1e1e1e; /* Slightly lighter than the background */
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 4px 10px rgb(85 185 255);
+  /* box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1); */
   max-width: 500px;
   width: 100%;
 }
@@ -179,7 +198,7 @@
 
 /* About Section */
 .about-section {
-  background-color: #1f1f1fb4;
+  background-color: #1a1a1a;
   color: #fff;
   padding:60px 5%;
   display: flex;

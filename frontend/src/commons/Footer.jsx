@@ -42,7 +42,7 @@ const Footer = () => {
       <div style={{ display: "flex", justifyContent: "center", gap: "15px", marginBottom: "20px" }}>
         {[
           { icon: <FaFacebook />, link: "https://facebook.com" },
-          { icon: <FaLinkedin />, link: "https://linkedin.com" },
+          { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/aamir-jamal-aj-%F0%9F%8C%90-84183622b/?lipi=urn%3Ali%3Apage%3Ad_flagship3_notifications%3BLmtc1vROSRmflI3Q9O6yaw%3D%3D" },
           { icon: <FaTwitter />, link: "https://twitter.com" },
           { icon: <FaGithub />, link: "https://github.com" },
         ].map((item, index) => (
@@ -95,7 +95,7 @@ const Footer = () => {
               textDecoration: "none",
               transition: "color 0.3s ease-in-out",
             }}
-          >
+            >
             {text}
           </motion.button>
         ))}

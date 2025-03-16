@@ -1,55 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { FaBars, FaHome, FaProjectDiagram, FaUser, FaEnvelope } from "react-icons/fa";
-import "../css/sidebar.css"; // External CSS for styling
+import React from 'react';
+import { Button, Offcanvas } from 'react-bootstrap';
 
-const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      if (!mobile) {
-        setIsCollapsed(false); // Expand sidebar on large screens
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [setIsCollapsed]);
-
+const Sidebar = ({ activeSection, setActiveSection, showSidebar, setShowSidebar }) => {
   return (
-    <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
-      {/* Sidebar Header */}
-      <div className="sidebar-header">
-        {!isCollapsed && <h3 className="logo">Admin Panel</h3>}
-        {isMobile && (
-          <button className="toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
-            <FaBars />
-          </button>
-        )}
-      </div>
-
-      {/* Sidebar Menu */}
-      <ul className="menu">
-        <li>
-          <FaHome />
-          {!isCollapsed && <span>Dashboard</span>}
-        </li>
-        <li>
-          <FaProjectDiagram />
-          {!isCollapsed && <span>Projects</span>}
-        </li>
-        <li>
-          <FaUser />
-          {!isCollapsed && <span>Profile</span>}
-        </li>
-        <li>
-          <FaEnvelope />
-          {!isCollapsed && <span>Messages</span>}
-        </li>
-      </ul>
-    </div>
+    <Offcanvas
+      show={showSidebar}
+      onHide={() => setShowSidebar(false)}
+      responsive="lg"
+      className="border-end"
+      style={{ width: '280px' }}
+    >
+      <Offcanvas.Header closeButton className="d-lg-none">
+        <Offcanvas.Title>Portfolio Dashboard</Offcanvas.Title>
+      </Offcanvas.Header>
+      <Offcanvas.Body className="p-0">
+        <div className="d-flex flex-column h-100">
+          <div className="p-3 border-bottom">
+            <h4 className="mb-0">Your Portfolio</h4>
+          </div>
+          
+          <nav className="nav flex-column flex-grow-1 p-3">
+            {['dashboard', 'projects', 'skills', 'messages'].map((section) => (
+              <Button
+                key={section}
+                variant={activeSection === section ? 'primary' : 'light'}
+                onClick={() => {
+                  setActiveSection(section);
+                  setShowSidebar(false);
+                }}
+                className="mb-2 text-start w-100 text-capitalize"
+              >
+                {section.replace('-', ' ')}
+              </Button>
+            ))}
+          </nav>
+        </div>
+      </Offcanvas.Body>
+    </Offcanvas>
   );
 };
 

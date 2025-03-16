@@ -5,6 +5,7 @@ import Hero from '../../commons/Hero.jsx'
 // import AboutC from '../../components/About.jsx'
 import '../../App.css';
 import Profile from '../../assets/Profile.jpg';
+import Footer from '../../commons/Footer.jsx';
 
 const About = () => {
   return (<>
@@ -51,11 +52,13 @@ const About = () => {
             <img
               src={Profile}
               alt="About Me"
-              className="img-fluid rounded shadow-lg"
+              className="img-fluid  rounded-circle"
+              style={{boxShadow: "0 0 15px rgba(0, 216, 255, 0.6)"}}
             />
           </motion.div>
         </div>
       </section>
+      <Footer/>
     </>
     
   )
