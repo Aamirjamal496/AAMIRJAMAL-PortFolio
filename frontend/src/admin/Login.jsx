@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { ToastContainer, toast } from "react-toastify";
 import './css/Login.css';  // We'll add some custom CSS for animations
@@ -11,6 +11,8 @@ const Login = () => {
   const [password, setpassword] = useState("");
   const [Msg, setMsg] = useState("");
   const Navigate= useNavigate();
+  const formRef = useRef(null);  // Create a ref for the form container
+
   const login=async(event)=>{
     event.preventDefault();
     try{
@@ -49,10 +51,11 @@ const Login = () => {
         timeout={500}
         classNames="fade"
         unmountOnExit
+        nodeRef={formRef}
       >
         <div className="card p-4 shadow-lg border-0" style={{ maxWidth: '400px', width: '100%' }}>
           <h3 className="text-center mb-4">Admin Login</h3>
-          <p style={{color:"green;"}}>{Msg}</p>
+          <p style={{color:"green"}}>{Msg}</p>
           <form onSubmit={login}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email</label>

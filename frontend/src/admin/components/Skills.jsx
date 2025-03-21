@@ -1,14 +1,63 @@
-import React, { useState } from 'react';
-import { Row, Col, Card, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Card, Button, Table, Spinner } from 'react-bootstrap';
 import AddSkillModal from '../commons/AddSkillModal';
+import axios from 'axios';
 
-const SkillsContent = ({ skills, setSkills }) => {
+const SkillsContent = ({  setSkills }) => {
+  const [skills, setSkillsState] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
 
-  const addNewSkillToState = (newSkill) => {
-    setSkills((prevSkill) => [...prevSkills, newSkill]);
-  };
+  const token = localStorage.getItem('auth_token');
+  useEffect(()=>{
+    const fetchSkills = async()=>{
+      try{
+        if(!token){
+          setError('Authentication token is missing.');
+          return;
+        }
+        const response = await axios.get(`http://127.0.0.1:8000/api/getskills`,{
+          headers:{
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if(response.data && Array.isArray(response.data)){
+          setSkillsState(response.data);
+        }else{
+          setSkillsState([]);
+        }
+      }catch(err){
+        setError('Failed to fetch skills, Please try again later.');
+        console.error('Error fetching messages',  error);
+      }finally{
+        setLoading(false);
+      }
+    }
+    fetchSkills();
+  },[]);
+  const handleDeleteSkill =async(skillId)=>{
+    confirm('Are You Sure You Want To Delete Skill');
+    try{      
+      const response = await axios.delete(`http://127.0.0.1:8000/api/deleteSkill/${skillId}`,{
+        headers:{
+          Authorization:`Bearer ${token}`,
+        },
+      });
+      if(response.status ===201){
+        setSkillsState(skills.filter(skill => skill.id !== skillId));
+      }
+    }catch(err){
+      console.error('Error deleting skill', err);
+      alert('Failed to delete the skill');
+    }
+  }
 
+  const addNewSkillToState = (newSkill) => {
+    setSkills((prevSkill) => [...prevSkill, newSkill]);
+  };
+  if (loading) return <div className='d-flex justify-content-center'><Spinner animation='border' variant='primary'/></div>;
+  if (error) return <h3 className='text-danger text-center'>{error}</h3>;
   return (
     <div>
       <Row className="align-items-center mb-4">
@@ -21,34 +70,49 @@ const SkillsContent = ({ skills, setSkills }) => {
           </Button>
         </Col>
       </Row>
-
-      {/* <Row className="g-3">
-        {skills.map((skill, index) => (
-          <Col md={3} key={index}>
-            <Card className="h-100">
-              <Card.Body className="d-flex flex-column align-items-center">
-                {skill.image && (
-                  <img 
-                    src={skill.image} 
+      <Table striped bordered hover responsive>
+              <thead>
+                <tr>
+                  <th>Skill Icon</th>
+                  <th>Skill Name</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {skills.length > 0 ? (
+                skills.map(skill => (
+                  <tr key={skill.id} className={!skill.read ? 'fw-bold' : ''}>
+                    {/* Assuming skill.image.file contains the filename */}
+                  <td>
+                  <img
+                    src={skill.imageUrl || 'path/to/default/image.jpg'} // Correct image path
                     alt={skill.name}
-                    className="mb-2"
-                    style={{ width: '50px', height: '50px' }}
+                    style={{ width: '50px', height: '50px', objectFit: 'cover' }} // Styling the image
                   />
-                )}
-                <h5 className="mb-0">{skill.name}</h5>
-                <Button 
-                  variant="danger" 
-                  size="sm" 
-                  className="mt-2"
-                  // Placeholder for backend logic
-                >
-                  Remove
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row> */}
+                  </td>
+                    {/* <td>{skill.image}</td> */}
+                    <td>{skill.name}</td>
+                    <td>{new Date(skill.created_at).toLocaleDateString()}</td>
+                    
+                    <td>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => handleDeleteSkill(skill.id)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+               ))
+              ) : (
+                <tr>
+                  <td colSpan="5" className="text-center">No Skills available</td>
+                </tr>
+              )}
+              </tbody>
+            </Table>
 
       <AddSkillModal
         show={showAddModal}

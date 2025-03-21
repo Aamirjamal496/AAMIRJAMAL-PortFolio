@@ -25,7 +25,9 @@ class MessageController extends Controller
         return response()->json(['message'=>'Message Sent Successfullly','messages'=>$message],201);
     }
     public function getMessages(Request $request){
+        // $messages=  Message::paginate(10);
         return Message::all();
+        // return response()->json($messages);
     }
     public function destroy($id){
         $message = Message::find($id);

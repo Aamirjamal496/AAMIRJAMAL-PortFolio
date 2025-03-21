@@ -23,6 +23,33 @@ class SkillsController extends Controller
             'name'=>$request->name,
             'image'=>$imagePath,
         ]);
-        return response()->json(['message'=>'Skill Added Successfully','skills'=>$skill],201);
+        return response()->json(['message'=>'Skill Added Successfully','skills'=>$skill , 'imageUrl'=>$imagePath ? url('storage/'. $imagePath) : null],201);
+    }
+    public function getSkills(){
+        $skills = Skills::all();
+        foreach($skills as $skill){
+            if($skill->image){
+                $skill->imageUrl = url('storage/' . $skill->image);
+            }
+        }
+        return response()->json($skills);
+    }
+    public function getHomeSkills(){
+        $skills = Skills::all();
+        foreach($skills as $skill){
+            if($skill->image){
+                $skill->imageUrl = url('storage/' . $skill->image);
+            }
+        }
+        return response()->json($skills);
+    }
+    public function destroy($id){
+        $skill = Skills::find($id);
+        if($skill){
+            $skill->delete();
+            return response()->json(['message','Skill deleted Successfully'],201);
+        }else{
+            return response()->json(['message'=>'Skill not found'],404);
+        }
     }
 }

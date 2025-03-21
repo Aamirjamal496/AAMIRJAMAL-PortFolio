@@ -65,7 +65,7 @@ const AddSkillModal = ({ show, handleClose, OnSkillAdded }) => {
         <Modal.Title>Add New Skill</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form encType='multipart/form-data'>
           <Form.Group className="mb-3">
             <Form.Label>Skill Name</Form.Label>
             <Form.Control

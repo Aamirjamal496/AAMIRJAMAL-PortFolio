@@ -1,3 +1,41 @@
+/* Home Hero section */
+@media (max-width: 768px) {
+  section {
+    flex-direction: column; /* Stack the content vertically on smaller screens */
+    padding: 0 20px; /* Increase padding on smaller screens */
+  }
+
+  .hero h1 {
+    font-size: 5vw; /* Adjust font size for smaller screens */
+  }
+
+  .hero h2 {
+    font-size: 4vw; /* Adjust font size for smaller screens */
+  }
+
+  .hero .right-section {
+    height: 50vw; /* Adjust the size of the image container for mobile */
+    width: 50vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 6vw; /* Even smaller font size on very small screens */
+  }
+
+  .hero h2 {
+    font-size: 5vw;
+  }
+
+  .hero .right-section {
+    height: 60vw; /* Larger container for small screens */
+    width: 60vw;
+  }
+}
+
+
+
 
 .navbar {
   position: fixed;

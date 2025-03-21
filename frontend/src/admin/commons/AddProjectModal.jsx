@@ -67,7 +67,7 @@ const AddProjectModal = ({ show, handleClose, onProjectAdded }) => {
         <Modal.Title>Add New Project</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form encType='multipart/form-data'>
           <Form.Group className="mb-3">
             <Form.Label>Project Title</Form.Label>
             <Form.Control

@@ -95,9 +95,11 @@ const PortfolioDashboard = () => {
       />
 
       <main className="flex-grow-1 p-4" style={{ marginLeft: '280px' }}>
-        <div className="d-lg-none" style={{ height: '60px' }}></div>
         <Navbar />
+        <div className="d-lg-none mt-4" style={{ height: '60px' }}>
+        </div>
         {renderSection()}
+        
       </main>
     </div>
   );

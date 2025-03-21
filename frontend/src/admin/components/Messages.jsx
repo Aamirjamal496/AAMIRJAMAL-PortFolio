@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Button, Badge } from 'react-bootstrap';
+import { Table, Button, Badge, Pagination } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
 
@@ -7,6 +7,8 @@ const MessagesContent = ({ setMessages }) => {
   const [messages, setMessagesState] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // const [currentPage, setCurrentPage] = useState(1); //Current Page state
+  // const [totalPages, setTotalPages] = useState(1); //Total pages state
 
   const token = localStorage.getItem('auth_token');
   // const messageList = Array.isArray(messages) ? messages : [];
@@ -19,7 +21,7 @@ const MessagesContent = ({ setMessages }) => {
           setError('Authentication token is missing.');
           return;
         }
-        const response = await axios.get('http://127.0.0.1:8000/api/messages/', {
+        const response = await axios.get(`http://127.0.0.1:8000/api/messages`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -28,6 +30,7 @@ const MessagesContent = ({ setMessages }) => {
         // If messages are fetched from API, update the state
         if (response.data && Array.isArray(response.data)) {
           setMessagesState(response.data);
+          // setTotalPages(response.data.last_page);
         } else {
           setMessagesState([]);
         }
@@ -50,6 +53,7 @@ const MessagesContent = ({ setMessages }) => {
   //   return date.toLocaleDateString();
   // };
   const handleDeleteMessage = async(messageId) => {
+    confirm('Are you sure to delete');
     // setMessages(messages.filter(message => message.id !== messageId));
     try{
       const response = await axios.delete(`http://127.0.0.1:8000/api/delete/${messageId}`,{
@@ -67,7 +71,7 @@ const MessagesContent = ({ setMessages }) => {
       alert('Failed to delete the message');
     }
   };
-  if (loading) return <div>Loading messages...</div>;
+  if (loading) return <div className='position-absolute top-50 start-80'>Loading messages...</div>;
   if (error) return <h3 className='text-danger text-center'>{error}</h3>;
 
   return (
@@ -115,6 +119,25 @@ const MessagesContent = ({ setMessages }) => {
         )}
         </tbody>
       </Table>
+
+      {/* Pagination Controls */}
+      {/* <Pagination>
+        <Pagination.Prev onClick={()=>setCurrentPage((prev)=>Math.max(prev - 1, 1))}
+        disabled={currentPage === 1}
+        />
+        {[...Array(totalPages)].map((_, index)=>(
+          <Pagination.Item
+          key={index + 1}
+          active = {index +1 === currentPage}
+          onClick={()=>setCurrentPage(index+1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+        <Pagination.Next 
+        onClick={()=>setCurrentPage((prev)=>Math.min(prev+1, totalPages))} disabled={currentPage === totalPages}
+        />
+      </Pagination> */}
     </div>
   );
 };

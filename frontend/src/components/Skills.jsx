@@ -1,17 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import { FaReact, FaHtml5, FaCss3Alt, FaJs, FaNodeJs, FaDatabase, FaPhp } from "react-icons/fa";
+import axios from 'axios';
 
-const skills = [
-  { name: "HTML5", icon: <FaHtml5 color="#E44D26" size="3rem" /> },
-  { name: "CSS3", icon: <FaCss3Alt color="#1572B6" size="3rem" /> },
-  { name: "JavaScript", icon: <FaJs color="#F7DF1E" size="3rem" /> },
-  { name: "React.js", icon: <FaReact color="#61DBFB" size="3rem" /> },
-  { name: "Node.js", icon: <FaNodeJs color="#68A063" size="3rem" /> },
-  { name: "Php", icon: <FaPhp color="#68A063" size="3rem" /> },
-  { name: "MySql", icon: <FaDatabase color="#FF5733" size="3rem" /> },
-];
+// const skills = [
+//   { name: "HTML5", icon: <FaHtml5 color="#E44D26" size="3rem" /> },
+//   { name: "CSS3", icon: <FaCss3Alt color="#1572B6" size="3rem" /> },
+//   { name: "JavaScript", icon: <FaJs color="#F7DF1E" size="3rem" /> },
+//   { name: "React.js", icon: <FaReact color="#61DBFB" size="3rem" /> },
+//   { name: "Node.js", icon: <FaNodeJs color="#68A063" size="3rem" /> },
+//   { name: "Php", icon: <FaPhp color="#68A063" size="3rem" /> },
+//   { name: "MySql", icon: <FaDatabase color="#FF5733" size="3rem" /> },
+// ];
 const Skills = () => {
+  const [skills, setskills] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(()=>{
+    const fetchSkills = async ()=>{
+      try{
+        const response = await axios.get('http://127.0.0.1:8000/api/gethomeskill');
+        setskills(response.data);
+      }catch(err){
+        setError('Failed to load skills. Please try again later.');
+      }finally{
+        setLoading(false);
+      }
+    };
+    fetchSkills();
+  },[]);
   return (
     <section
       style={{
@@ -45,7 +63,7 @@ const Skills = () => {
             whileHover={{ scale: 1.1 }}
             style={{
               backgroundColor: "#222",
-              padding: "20px",
+              padding: "10px",
               borderRadius: "10px",
               display: "flex",
               flexDirection: "column",
@@ -54,7 +72,9 @@ const Skills = () => {
               cursor: "pointer",
             }}
           >
-            {skill.icon}
+            {skill.imageUrl && (
+              <img src={skill.imageUrl} alt={skill.name} style={{ width: '120px', height: '120px', marginBottom: '10px' }} />
+            )}
             <span style={{ marginTop: "10px", fontSize: "1.2rem", fontWeight: "bold" }}>{skill.name}</span>
           </motion.div>
         ))}
