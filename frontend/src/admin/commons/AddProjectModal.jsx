@@ -6,6 +6,7 @@ const AddProjectModal = ({ show, handleClose, onProjectAdded }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [prLink, setprLink] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleImageChange = (e) => {
@@ -16,8 +17,16 @@ const AddProjectModal = ({ show, handleClose, onProjectAdded }) => {
   };
 
   const handleSave = async () => {
-    if (!title || !description) {
-      alert('Title and Description are required');
+    if (!title || !description || !prLink) {
+      alert('Title is required');
+      return;
+    }
+    if (!title || !description || !prLink) {
+      alert('Description is required');
+      return;
+    }
+    if (!prLink) {
+      alert('ProjectLink is required');
       return;
     }
     setLoading(true);
@@ -25,6 +34,7 @@ const AddProjectModal = ({ show, handleClose, onProjectAdded }) => {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
+    formData.append('prLink', prLink);
     if (image) {
       formData.append('image', image);
     }
@@ -48,6 +58,7 @@ const AddProjectModal = ({ show, handleClose, onProjectAdded }) => {
         setTitle('');
         setDescription('');
         setImage(null);
+        setprLink('');
         onProjectAdded(response.data.project);
         handleClose();
       } else {
@@ -74,7 +85,7 @@ const AddProjectModal = ({ show, handleClose, onProjectAdded }) => {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-            />
+            required/>
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -86,6 +97,14 @@ const AddProjectModal = ({ show, handleClose, onProjectAdded }) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Project Link</Form.Label>
+            <Form.Control
+              type="url"
+              value={prLink}
+              onChange={(e) => setprLink(e.target.value)}
+           required />
+          </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Project Image</Form.Label>
@@ -93,7 +112,7 @@ const AddProjectModal = ({ show, handleClose, onProjectAdded }) => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-            />
+           required />
           </Form.Group>
         </Form>
       </Modal.Body>

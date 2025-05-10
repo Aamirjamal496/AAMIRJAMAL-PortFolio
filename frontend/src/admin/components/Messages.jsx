@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Table, Button, Badge, Pagination } from 'react-bootstrap';
+import { Table, Button, Badge, Pagination, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
 
@@ -71,7 +71,13 @@ const MessagesContent = ({ setMessages }) => {
       alert('Failed to delete the message');
     }
   };
-  if (loading) return <div className='position-absolute top-50 start-80'>Loading messages...</div>;
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
   if (error) return <h3 className='text-danger text-center'>{error}</h3>;
 
   return (

@@ -9,8 +9,9 @@ const About = () => {
       style={{
         backgroundColor: "#1a1a1a",
         color: "#fff",
-        padding: "80px 5%",
+        padding: "60px 5%",
         display: "flex",
+        flexDirection:'row',
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "wrap",

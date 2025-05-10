@@ -10,10 +10,12 @@ class ProjectController extends Controller
 {
     public function store(Request $request)
     {
+        $regex ="/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/";
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'link'=>array("required", "regex:".$regex),
         ]);
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('projects', 'public');
@@ -26,6 +28,7 @@ class ProjectController extends Controller
             'projectTitle' => $request->title,
             'projectDescription' => $request->description,
             'image' => $imagePath,
+            'projectlink' => $request->link,
         ]);
 
         return response()->json([
